@@ -1,6 +1,7 @@
 
 package com.w3r1.eventLocator.create.client.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.annotation.Generated;
+import java.util.Date;
 
 @Generated("net.hexar.json2pojo")
 @Data
@@ -41,7 +43,8 @@ public class Event {
     private String countryName;
 
     @JsonProperty
-    private String created;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date created;
 
     @JsonProperty
     private String description;
@@ -74,7 +77,8 @@ public class Event {
     private String longitude;
 
     @JsonProperty
-    private String modified;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modified;
 
     @JsonProperty("olson_path")
     private String olsonPath;
@@ -101,7 +105,8 @@ public class Event {
     private String regionName;
 
     @JsonProperty("start_time")
-    private String startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startTime;
 
     @JsonProperty("stop_time")
     private Object stopTime;

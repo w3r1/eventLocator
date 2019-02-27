@@ -86,9 +86,9 @@ public class EventfulClientTest {
 
         verify(restTemplate, times(1))
                 .exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class));
-        assertThat(eventsResponse.getPageNumber(), equalTo("1"));
-        assertThat(eventsResponse.getPageSize(), equalTo("1"));
-        assertThat(eventsResponse.getPageCount(), equalTo("1"));
+        assertThat(eventsResponse.getPageNumber(), equalTo(1));
+        assertThat(eventsResponse.getPageSize(), equalTo(1));
+        assertThat(eventsResponse.getPageCount(), equalTo(1));
         assertThat(eventsResponse.getEvents().getEvent(), hasSize(1));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(
@@ -128,9 +128,9 @@ public class EventfulClientTest {
 
         verify(restTemplate, times(1))
                 .exchange(anyString(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class));
-        assertThat(eventsResponse.getPageNumber(), equalTo("1"));
-        assertThat(eventsResponse.getPageSize(), equalTo("1"));
-        assertThat(eventsResponse.getPageCount(), equalTo("1"));
+        assertThat(eventsResponse.getPageNumber(), equalTo(1));
+        assertThat(eventsResponse.getPageSize(), equalTo(1));
+        assertThat(eventsResponse.getPageCount(), equalTo(1));
         assertThat(eventsResponse.getEvents().getEvent(), hasSize(1));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(
@@ -185,35 +185,6 @@ public class EventfulClientTest {
     }
 
     @Test
-    public void unsuccessfulEventsReturn() {
-
-        String testLocation = "London";
-        int testPageNo = 1;
-        int testPageSize = 10;
-        HttpStatus testStatus = BAD_GATEWAY;
-
-        EventsResponse testEventsResponse = null;
-        ResponseEntity<EventsResponse> responseEntity
-                = new ResponseEntity<>(testEventsResponse, testStatus);
-        ArgumentCaptor<String> uriCaptor = ArgumentCaptor.forClass(String.class);
-        given(restTemplate
-                .exchange(uriCaptor.capture(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
-                .willReturn(responseEntity);
-
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).build();
-        Optional<EventsResponse> eventsResponseOptional =
-                eventfulClient.getEventfulEvents(webRequest, testPageNo, testPageSize);
-
-        assertFalse(eventsResponseOptional.isPresent());
-
-        verify(mockLOGGER, times(1)).warn(
-                eq("No result from getEventfulEvents with {}, {}, {} with reason: {}"),
-                eq(webRequest), eq(testPageNo), eq(testPageSize), eq(testStatus)
-        );
-    }
-
-
-    @Test
     public void fallbackWithHttpStatusCodeException() {
 
         String testErrorBody = "{\"error\":\"some error\"}";
@@ -250,6 +221,42 @@ public class EventfulClientTest {
         );
     }
 
+    @Test
+    public void noNullPointersOnNullParams() {
+
+        Optional<EventsResponse> eventsResponseOptional =
+                eventfulClient.getEventfulEvents(null, -1, -1);
+        assertFalse(eventsResponseOptional.isPresent());
+    }
+
+    @Test
+    public void unsuccessfulEventsReturn() {
+
+        String testLocation = "London";
+        int testPageNo = 1;
+        int testPageSize = 10;
+        HttpStatus testStatus = BAD_GATEWAY;
+
+        EventsResponse testEventsResponse = null;
+        ResponseEntity<EventsResponse> responseEntity
+                = new ResponseEntity<>(testEventsResponse, testStatus);
+        ArgumentCaptor<String> uriCaptor = ArgumentCaptor.forClass(String.class);
+        given(restTemplate
+                .exchange(uriCaptor.capture(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
+                .willReturn(responseEntity);
+
+        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).build();
+        Optional<EventsResponse> eventsResponseOptional =
+                eventfulClient.getEventfulEvents(webRequest, testPageNo, testPageSize);
+
+        assertFalse(eventsResponseOptional.isPresent());
+
+        verify(mockLOGGER, times(1)).warn(
+                eq("No result from getEventfulEvents with {}, {}, {} with reason: {}"),
+                eq(webRequest), eq(testPageNo), eq(testPageSize), eq(testStatus)
+        );
+    }
+
     private EventsResponse defaultEventsResponse() {
 
         Event event = Event.builder()
@@ -261,9 +268,9 @@ public class EventfulClientTest {
                 .build();
 
         return EventsResponse.builder()
-                .pageNumber("1")
-                .pageSize("1")
-                .pageCount("1")
+                .pageNumber(1)
+                .pageSize(1)
+                .pageCount(1)
                 .events(events)
                 .build();
     }

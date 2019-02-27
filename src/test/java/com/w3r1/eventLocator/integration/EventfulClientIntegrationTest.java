@@ -75,8 +75,8 @@ public class EventfulClientIntegrationTest {
         Optional<EventsResponse> eventsResponseOptional = eventfulClient.getEventfulEvents(londonEventsRequest, 1, 2);
         EventsResponse eventsResponse = eventsResponseOptional.get();
 
-        assertThat(eventsResponse.getPageNumber(), equalTo("1"));
-        assertThat(eventsResponse.getPageSize(), equalTo("2"));
+        assertThat(eventsResponse.getPageNumber(), equalTo(1));
+        assertThat(eventsResponse.getPageSize(), equalTo(2));
         assertThat(eventsResponse.getEvents().getEvent(), hasSize(2));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(

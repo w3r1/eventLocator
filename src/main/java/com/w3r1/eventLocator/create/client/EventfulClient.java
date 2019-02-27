@@ -62,6 +62,11 @@ public class EventfulClient {
     )
     public Optional<EventsResponse> getEventfulEvents(EventsWebRequest request, int pageNo, int pageSize) {
 
+        boolean isRequestGiven = request != null;
+        if (!isRequestGiven) {
+            return Optional.empty();
+        }
+
         boolean isCategoryGiven = isNotBlank(request.getCategory());
         UriComponentsBuilder eventsUrlBuilder = UriComponentsBuilder.fromHttpUrl(eventfulEventsUrl)
                 .queryParam("app_key", appKey)

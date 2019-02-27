@@ -26,16 +26,16 @@ public class EventsResponse {
     private Object lastItem;
 
     @JsonProperty("page_count")
-    private String pageCount;
+    private Integer pageCount;
 
     @JsonProperty("page_items")
     private Object pageItems;
 
     @JsonProperty("page_number")
-    private String pageNumber;
+    private Integer pageNumber;
 
     @JsonProperty("page_size")
-    private String pageSize;
+    private Integer pageSize;
 
     @JsonProperty("search_time")
     private String searchTime;

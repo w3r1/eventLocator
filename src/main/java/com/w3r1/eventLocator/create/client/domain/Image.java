@@ -13,8 +13,8 @@ public class Image {
     @JsonProperty
     private Object caption;
 
-    @JsonProperty
-    private String height;
+    @JsonProperty("height")
+    private Integer imgHeight;
 
     @JsonProperty
     private Medium medium;
@@ -25,9 +25,9 @@ public class Image {
     @JsonProperty
     private Thumb thumb;
 
-    @JsonProperty
-    private String url;
+    @JsonProperty("url")
+    private String imgUrl;
 
-    @JsonProperty
-    private String width;
+    @JsonProperty("width")
+    private Integer imgWidth;
 }
