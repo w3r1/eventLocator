@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 
 @Data
@@ -80,5 +81,36 @@ public class EventLocation implements Serializable {
         this.imgUrl = imgUrl;
         this.imgWidth = imgWidth;
         this.imgHeight = imgHeight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EventLocation that = (EventLocation) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(eventId, that.eventId) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(category, that.category) &&
+                Objects.equals(venueId, that.venueId) &&
+                Objects.equals(venueName, that.venueName) &&
+                Objects.equals(venueUrl, that.venueUrl) &&
+                Objects.equals(venueAddress, that.venueAddress) &&
+                Objects.equals(cityName, that.cityName) &&
+                Objects.equals(regionName, that.regionName) &&
+                Objects.equals(countryName, that.countryName) &&
+                Objects.equals(url, that.url) &&
+                Objects.equals(startTime, that.startTime) &&
+                Objects.equals(created, that.created) &&
+                Objects.equals(modified, that.modified) &&
+                Objects.equals(imgUrl, that.imgUrl) &&
+                Objects.equals(imgWidth, that.imgWidth) &&
+                Objects.equals(imgHeight, that.imgHeight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, eventId, title, description, category, venueId, venueName, venueUrl, venueAddress, cityName, regionName, countryName, url, startTime, created, modified, imgUrl, imgWidth, imgHeight);
     }
 }
