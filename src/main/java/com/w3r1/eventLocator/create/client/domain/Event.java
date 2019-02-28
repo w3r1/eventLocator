@@ -61,8 +61,8 @@ public class Event {
     @JsonProperty
     private Object groups;
 
-    @JsonProperty
-    private String id;
+    @JsonProperty("id")
+    private String eventId;
 
     @JsonProperty
     private Image image;

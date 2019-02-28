@@ -4,7 +4,7 @@ import com.w3r1.eventLocator.create.client.EventfulClient;
 import com.w3r1.eventLocator.create.client.domain.EventsResponse;
 import com.w3r1.eventLocator.create.request.EventsWebRequest;
 import com.w3r1.eventLocator.create.service.domain.EventLocationsPage;
-import com.w3r1.eventLocator.entity.EventLocation;
+import com.w3r1.eventLocator.model.EventLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dozer.DozerBeanMapper;
@@ -29,7 +29,7 @@ public class EventfulEventsServiceImpl implements EventfulEventsService {
     }
 
     @Override
-    public EventLocationsPage getEventfulEvents(EventsWebRequest request, int pageNo, int pageSize) {
+    public EventLocationsPage getEventfulEvents(final EventsWebRequest request, int pageNo, int pageSize) {
 
         final Optional<EventsResponse> eventfulEvents = eventfulClient.getEventfulEvents(request, pageNo, pageSize);
         return eventfulEvents.map(eventsResponse -> {
@@ -48,7 +48,7 @@ public class EventfulEventsServiceImpl implements EventfulEventsService {
                     .map(event -> {
 
                         EventLocation eventLocation = Try(() -> {
-                            EventLocation location = new EventLocation();
+                            EventLocation location = EventLocation.builder().category(request.getCategory()).build();
                             BEAN_MAPPER.map(event, location);
                             BEAN_MAPPER.map(event.getImage(), location);
                             return location;

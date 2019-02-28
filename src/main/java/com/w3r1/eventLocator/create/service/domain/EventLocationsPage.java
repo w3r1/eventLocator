@@ -1,6 +1,6 @@
 package com.w3r1.eventLocator.create.service.domain;
 
-import com.w3r1.eventLocator.entity.EventLocation;
+import com.w3r1.eventLocator.model.EventLocation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

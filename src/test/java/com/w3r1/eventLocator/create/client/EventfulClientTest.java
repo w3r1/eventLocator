@@ -92,7 +92,7 @@ public class EventfulClientTest {
         assertThat(eventsResponse.getEvents().getEvent(), hasSize(1));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(
-                        hasProperty("id", equalTo("123-abc-001"))
+                        hasProperty("eventId", equalTo("123-abc-001"))
                 ));
 
         String capturedRequestUri = uriCaptor.getValue();
@@ -111,9 +111,9 @@ public class EventfulClientTest {
     public void getEventsWithCategoryFiltering() {
 
         String testLocation = "London";
+        String testCategory = "music";
         int testPageNo = 1;
         int testPageSize = 10;
-        String testCategory = "music";
 
         ResponseEntity<EventsResponse> responseEntity
                 = new ResponseEntity<>(defaultEventsResponse(), OK);
@@ -134,7 +134,7 @@ public class EventfulClientTest {
         assertThat(eventsResponse.getEvents().getEvent(), hasSize(1));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(
-                        hasProperty("id", equalTo("123-abc-001"))
+                        hasProperty("eventId", equalTo("123-abc-001"))
                 ));
 
         String capturedRequestUri = uriCaptor.getValue();
@@ -260,7 +260,7 @@ public class EventfulClientTest {
     private EventsResponse defaultEventsResponse() {
 
         Event event = Event.builder()
-                .id("123-abc-001")
+                .eventId("123-abc-001")
                 .build();
 
         Events events = Events.builder()

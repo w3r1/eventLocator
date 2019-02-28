@@ -42,10 +42,11 @@ public class EventfulEventsServiceTest {
     public void getEventfulEvents() throws IOException {
 
         String testLocation = "London";
+        String testCategory = "music";
         int testPageNo = 1;
         int testPageSize = 10;
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).build();
+        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).category(testCategory).build();
         given(eventfulClient.getEventfulEvents(eq(webRequest), eq(testPageNo), eq(testPageSize)))
                 .willReturn(Optional.of(defaultEventsResponse()));
 
@@ -54,10 +55,12 @@ public class EventfulEventsServiceTest {
         assertThat(eventLocationsPage.getPageNumber(), equalTo(1));
         assertThat(eventLocationsPage.getPageCount(), equalTo(4398));
         assertThat(eventLocationsPage.getEventLocations(), hasSize(2));
-        assertThat(eventLocationsPage.getEventLocations().get(0).getId(), equalTo("E0-001-122804325-0"));
+        assertThat(eventLocationsPage.getEventLocations().get(0).getEventId(), equalTo("E0-001-122804325-0"));
         assertThat(eventLocationsPage.getEventLocations().get(0).getImgUrl(), containsString("friday-eve-parkrun-58.jpeg"));
-        assertThat(eventLocationsPage.getEventLocations().get(1).getId(), equalTo("E0-001-123723417-3"));
+        assertThat(eventLocationsPage.getEventLocations().get(0).getCategory(), equalTo(testCategory));
+        assertThat(eventLocationsPage.getEventLocations().get(1).getEventId(), equalTo("E0-001-123723417-3"));
         assertThat(eventLocationsPage.getEventLocations().get(1).getImgUrl(), containsString("dutty-dancing-dancehall-afrobeats-hip-hop-92.jpeg"));
+        assertThat(eventLocationsPage.getEventLocations().get(1).getCategory(), equalTo(testCategory));
     }
 
     @Test

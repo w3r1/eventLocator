@@ -12,5 +12,4 @@ public class EventLocatorApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

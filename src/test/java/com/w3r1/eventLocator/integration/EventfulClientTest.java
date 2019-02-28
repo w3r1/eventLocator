@@ -32,9 +32,9 @@ import static org.springframework.http.HttpStatus.OK;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @TestPropertySource(locations="classpath:testapplication.properties")
-public class EventfulClientIntegrationTest {
+public class EventfulClientTest {
 
-    private static final String BASE_PATH = EventfulClientIntegrationTest.class.getResource("../../../..").getPath();
+    private static final String BASE_PATH = EventfulClientTest.class.getResource("../../../..").getPath();
     private static final String JSON_RESPONSE_FILE = BASE_PATH + "eventsExampleResponse.json";
 
     @Autowired
@@ -80,11 +80,11 @@ public class EventfulClientIntegrationTest {
         assertThat(eventsResponse.getEvents().getEvent(), hasSize(2));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(
-                        hasProperty("id", equalTo("E0-001-122804325-0"))
+                        hasProperty("eventId", equalTo("E0-001-122804325-0"))
                 ));
         assertThat(eventsResponse.getEvents().getEvent(),
                 hasItem(
-                        hasProperty("id", equalTo("E0-001-123723417-3"))
+                        hasProperty("eventId", equalTo("E0-001-123723417-3"))
                 ));
     }
 
