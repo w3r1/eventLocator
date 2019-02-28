@@ -15,7 +15,5 @@ public interface EventLocationRepository extends ElasticsearchRepository<EventLo
            "        \"type\": \"cross_fields\"" +
            "    }" +
            "}")
-    Page<EventLocation> searchCrossThroughTitleDescriptionCategoryAndCity(
-            String crossfieldSearch,
-            Pageable page);
+    Page<EventLocation> searchCrossThroughTitleDescriptionCategoryAndCity(String crossfieldSearch, Pageable page);
 }

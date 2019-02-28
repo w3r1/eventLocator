@@ -109,4 +109,35 @@ public class EventLocationRepositoryTest {
         assertThat(eventLocationList, hasSize(1));
         assertThat(eventLocationList.get(0).getTitle(), equalTo(eventLocation2.getTitle()));
     }
+
+    @Test
+    public void emptyResult() {
+
+        EventLocation eventLocation1 = EventLocation.builder()
+                .title("Bremen")
+                .description("Music in Bremen")
+                .category("music")
+                .cityName("Bremen")
+                .build();
+
+        EventLocation eventLocation2 = EventLocation.builder()
+                .title("Bremen")
+                .description("Gaming in Bremen")
+                .category("GAMING")
+                .cityName("Bremen")
+                .build();
+
+        EventLocation eventLocation3 = EventLocation.builder()
+                .title("Bremen")
+                .description("Meeting in Bremen")
+                .category("meeting")
+                .cityName("Bremen")
+                .build();
+
+        repository.saveAll(Arrays.asList(eventLocation1, eventLocation2, eventLocation3));
+
+        Page<EventLocation> eventLocations =
+                repository.searchCrossThroughTitleDescriptionCategoryAndCity("Jazz", Pageable.unpaged());
+        assertThat(eventLocations.getTotalElements(), equalTo(0L));
+    }
 }
