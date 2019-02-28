@@ -1,0 +1,107 @@
+Howto start
+
+- Requirements: docker client, mvn3.3.9 or higher, JDK8 or higher
+- Commands:
+a) docker-compose up
+b) mvn clean install
+c) java -jar target/eventLocator-1.0.0-SNAPSHOT.jar
+
+Howto use
+
+1) eventLocator.postman_collection.json for Postman
+2) Manually:
+
+a) Transfer certain event-data from eventful to our system
+
+localhost:8080/eventlocator/eventful/transfer
+Body:
+{
+	"location": "Bromley",
+	"category": "music"
+}
+
+Be aware that when parsing London it can take more time because of the data amount.
+
+b) Free-text search (crossfield search by elastic through Title, Description, Category and City)
+
+localhost:8080/eventlocator/events?searchPhrase=is an active multidisciplinary&page=1&size=10
+Params:
+searchPhrase:as many words you want to search
+page:1
+size:10
+
+
+Done
+
+Distributed patterns
+- Microservices chassis SpringBoot, SpringCloud, e.g. Health or Measurement logs can be generated easily
+- Remote-process invocation concern addressed through
+a) execution isolation (hystrix) and
+b) circuit-breaker pattern to rehabilitate (again hystrix)
+
+GoF and SolidPrinciples
+- Facade pattern
+- SOLID: Decoupling e.g. service/impl, facade/impl
+
+Clean code
+- Lombok,
+- Vavr (lamdba exception handling), also in combination with
+- Java Optionals (lamda)
+- Dozer for cleaner mapping between PoJo
+
+Performance
+- Java streams/parallel Stream where possible due to requirements/restrictions
+
+Testing
+- Typical Junit tests
+- Usage of hamcrest
+- Usage of mockito for stubbing
+- Usage of powermock for static stubbing e.g. tracking Log-functionality
+- Integration for EventfulClient test and ElasticClient test
+- Usage of wiremock for on-wire testing, also for hystrix-integration-tests
+
+Devops
+- Some minor devops, docker-compose file for startup of elastic
+
+
+TODO for some improvements / technical
+
+Distributed patterns
+- Alot todo but step-by-step when required, but those may be needed soon
+-- Service registry pattern for scaled microservices
+-- Client-/server side load-balancing
+-- API gateway pattern for central security handling, rate limits, etc.
+
+GoF
+- TemplatePattern for TestAbstractClasses
+
+Api design
+- Better http header awareness through link header for pagination
+- more HATEOAS support, guidance in usage
+- Validations and better feedbacks (also bound to global exception handling)
+
+Clean code
+- Aspect-oriented integration of global exception handlers, logging, hystrix
+
+Performance
+- Async/parallel request to eventful (asking each page by 100-200 entries with threads); Simplified with @Async or
+direct threading
+
+Testing
+- Integration testing of controllers with usage of e.g. RestAssured or SpringControllerTest integrations
+- Acceptance testing through BDD with usage e.g. of Spock (cleaner Cucumber) to describe BDD stories (as a user, do sth, to achieve)
+- DDD through BDD stories, describing domain-specific acceptance tests
+- (if possible) if we would be the owner of eventful, pact-contract-testing for faster micro-service-integration-tests
+
+Devops
+- Dockerfile for integrating microservice into container
+- Kubernetes to scale
+- CI/CD/CD solutions
+- Monitoring (yes we have health endpoints already which can be observed)
+
+
+TODO for some improvements / business
+
+- Introducing of a cache mechanism like with key-value-usage of distributable couchbase
+-- With that checking certain keys if available, if not querying and storing data from eventful and setting up new
+cache key with TTL lets say 24h

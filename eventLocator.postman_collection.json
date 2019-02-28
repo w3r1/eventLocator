@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "867a2c3f-7a58-4921-8d52-38473ae7800e",
+		"name": "eventLocator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /eventlocator/events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/eventlocator/events?searchPhrase=is an active multidisciplinary&page=1&size=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"eventlocator",
+						"events"
+					],
+					"query": [
+						{
+							"key": "searchPhrase",
+							"value": "is an active multidisciplinary"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /eventlocator/eventful/transfer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": \"Bromley\",\n\t\"category\": \"music\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/eventlocator/eventful/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"eventlocator",
+						"eventful",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eventful.com",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api.eventful.com:80/json/events/search?app_key=PHV3rqv2ScXgNDTJ&location=Bromley&category=music",
+					"protocol": "http",
+					"host": [
+						"api",
+						"eventful",
+						"com"
+					],
+					"port": "80",
+					"path": [
+						"json",
+						"events",
+						"search"
+					],
+					"query": [
+						{
+							"key": "app_key",
+							"value": "PHV3rqv2ScXgNDTJ"
+						},
+						{
+							"key": "location",
+							"value": "Bromley"
+						},
+						{
+							"key": "category",
+							"value": "music"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

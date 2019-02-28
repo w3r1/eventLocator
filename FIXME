@@ -17,13 +17,11 @@ java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Numbe
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 
-Problem: Does not make sense but during AbstractElasticsearchRepository.saveAll set String index is tried to cast to Number
-indirectly through NumberKeyedRepository.java:28. Only ID of inheritance Number e.g. Long comes through.
+Problem: On ElasticsearchRepository.save/All Id gets cast to Number indirectly through NumberKeyedRepository.java:28.
+Only Id of inheritance java.lang.Number e.g. Long comes through.
 
 Wordarond 2:
-Ok for this demo but no solution, setting random Long on each generation of an eleastic document (not random enough)
+Ok for this demo but no solution, setting random Long on each generation of an eleastic document as Id (not random enough)
 
 Suggestion:
-Dont use unnecessary wrapper like spring-data-elasticsearch to avoid these problems. Similiar things faced with like-libraries
-e.g. spring-data-cassandra. Not well-supported libraries with alot of bugs and another downside is that it doesnt implements
-newest features. Ok for quick tech demos.
+Dont use unnecessary wrapper like spring-data-elasticsearch to avoid these problems. Not well-supported. Ok for tech demos.

@@ -26,11 +26,23 @@ public class EventLocationServiceImpl implements EventLocationService {
 
     @Override
     public void save(EventLocation eventLocation) {
+
+        boolean isParamGiven = eventLocation != null;
+        if (!isParamGiven) {
+            return;
+        }
+
         eventLocationRepository.save(eventLocation);
     }
 
     @Override
     public void saveAll(List<EventLocation> eventLocations) {
+
+        boolean isParamGiven = eventLocations != null;
+        if (!isParamGiven) {
+            return;
+        }
+
         eventLocationRepository.saveAll(eventLocations);
     }
 }

@@ -52,7 +52,9 @@ public class EventfulEventsServiceImpl implements EventfulEventsService {
                         EventLocation eventLocation = Try(() -> {
                             EventLocation location = EventLocation.builder().category(request.getCategory()).build();
                             BEAN_MAPPER.map(event, location);
-                            BEAN_MAPPER.map(event.getImage(), location);
+                            if (event.getImage() != null) {
+                                BEAN_MAPPER.map(event.getImage(), location);
+                            }
                             return location;
                         })
                         .onFailure(ex -> LOGGER.warn("Bean mapping error event->eventLocation with reason: {}", ex))
