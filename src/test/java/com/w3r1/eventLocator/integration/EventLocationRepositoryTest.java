@@ -67,7 +67,7 @@ public class EventLocationRepositoryTest {
         repository.saveAll(Arrays.asList(eventLocation1, eventLocation2, eventLocation3));
 
         Page<EventLocation> eventLocations =
-                repository.searchCrossThroughTitleDescriptionCategoryAndCity("Music Hamburg", Pageable.unpaged());
+                repository.searchThroughTitleDescriptionCategoryAndCity("Music Hamburg", Pageable.unpaged());
         List<EventLocation> eventLocationList = eventLocations.stream().collect(Collectors.toList());
 
         assertThat(eventLocationList, hasSize(3));
@@ -103,7 +103,7 @@ public class EventLocationRepositoryTest {
         repository.saveAll(Arrays.asList(eventLocation1, eventLocation2, eventLocation3));
 
         Page<EventLocation> eventLocations =
-                repository.searchCrossThroughTitleDescriptionCategoryAndCity("gaming", Pageable.unpaged());
+                repository.searchThroughTitleDescriptionCategoryAndCity("gaming", Pageable.unpaged());
         List<EventLocation> eventLocationList = eventLocations.stream().collect(Collectors.toList());
 
         assertThat(eventLocationList, hasSize(1));
@@ -137,7 +137,7 @@ public class EventLocationRepositoryTest {
         repository.saveAll(Arrays.asList(eventLocation1, eventLocation2, eventLocation3));
 
         Page<EventLocation> eventLocations =
-                repository.searchCrossThroughTitleDescriptionCategoryAndCity("Jazz", Pageable.unpaged());
+                repository.searchThroughTitleDescriptionCategoryAndCity("Jazz", Pageable.unpaged());
         assertThat(eventLocations.getTotalElements(), equalTo(0L));
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EventLocationService {
 
-    Page<EventLocation> searchCrossThroughTitleDescriptionCategoryAndCity(String crossfieldSearch, Pageable page);
+    Page<EventLocation> searchThroughTitleDescriptionCategoryAndCity(String searchPhrase, Pageable page);
 
     void save(EventLocation eventLocation);
 

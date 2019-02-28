@@ -4,7 +4,7 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.w3r1.eventLocator.create.client.EventfulClient;
 import com.w3r1.eventLocator.create.client.domain.EventsResponse;
-import com.w3r1.eventLocator.create.request.EventsWebRequest;
+import com.w3r1.eventLocator.create.request.EventfulSaveWebRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,7 +71,7 @@ public class EventfulClientTest {
 
         stubEventfulEventsCall();
 
-        EventsWebRequest londonEventsRequest = EventsWebRequest.builder().location("London").build();
+        EventfulSaveWebRequest londonEventsRequest = EventfulSaveWebRequest.builder().location("London").build();
         Optional<EventsResponse> eventsResponseOptional = eventfulClient.getEventfulEvents(londonEventsRequest, 1, 2);
         EventsResponse eventsResponse = eventsResponseOptional.get();
 
@@ -94,7 +94,7 @@ public class EventfulClientTest {
         WireMock.setGlobalFixedDelay(hystrixTimeout + 100);
         stubEventfulEventsCall();
 
-        EventsWebRequest londonEventsRequest = EventsWebRequest.builder().location("London").build();
+        EventfulSaveWebRequest londonEventsRequest = EventfulSaveWebRequest.builder().location("London").build();
         Optional<EventsResponse> eventsResponseOptional = eventfulClient.getEventfulEvents(londonEventsRequest, 1, 2);
 
         assertFalse(eventsResponseOptional.isPresent());

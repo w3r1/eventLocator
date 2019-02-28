@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface EventLocationRepository extends ElasticsearchRepository<EventLocation, Long> {
 
     @Query("{" +
@@ -15,5 +17,5 @@ public interface EventLocationRepository extends ElasticsearchRepository<EventLo
            "        \"type\": \"cross_fields\"" +
            "    }" +
            "}")
-    Page<EventLocation> searchCrossThroughTitleDescriptionCategoryAndCity(String crossfieldSearch, Pageable page);
+    Page<EventLocation> searchThroughTitleDescriptionCategoryAndCity(String searchPhrase, Pageable page);
 }

@@ -5,9 +5,11 @@ import com.w3r1.eventLocator.repository.EventLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EventLocationServiceImpl implements EventLocationService {
 
     private EventLocationRepository eventLocationRepository;
@@ -18,8 +20,8 @@ public class EventLocationServiceImpl implements EventLocationService {
     }
 
     @Override
-    public Page<EventLocation> searchCrossThroughTitleDescriptionCategoryAndCity(String crossfieldSearch, Pageable page) {
-        return eventLocationRepository.searchCrossThroughTitleDescriptionCategoryAndCity(crossfieldSearch, page);
+    public Page<EventLocation> searchThroughTitleDescriptionCategoryAndCity(String searchPhrase, Pageable page) {
+        return eventLocationRepository.searchThroughTitleDescriptionCategoryAndCity(searchPhrase, page);
     }
 
     @Override

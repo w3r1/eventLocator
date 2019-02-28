@@ -1,9 +1,13 @@
 package com.w3r1.eventLocator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,52 +16,73 @@ import java.util.Random;
 
 @Data
 @Builder
+@Entity
 @Document(indexName = "eventlocation_index", type = "eventlocation")
 public class EventLocation implements Serializable {
 
     private static final long serialVersionUID = -2654654765387231199L;
 
     @Id
+    @GeneratedValue
+    @JsonIgnore
     private Long id;
 
+    @JsonProperty
     private String eventId;
 
+    @JsonProperty
     private String title;
 
+    @JsonProperty
     private String description;
 
+    @JsonProperty
     private String category;
 
+    @JsonProperty
     private String venueId;
 
+    @JsonProperty
     private String venueName;
 
+    @JsonProperty
     private String venueUrl;
 
+    @JsonProperty
     private String venueAddress;
 
+    @JsonProperty
     private String cityName;
 
+    @JsonProperty
     private String regionName;
 
+    @JsonProperty
     private String countryName;
 
+    @JsonProperty
     private String url;
 
+    @JsonProperty
     private Date startTime;
 
+    @JsonProperty
     private Date created;
 
+    @JsonProperty
     private Date modified;
 
+    @JsonProperty
     private String imgUrl;
 
+    @JsonProperty
     private Integer imgWidth;
 
+    @JsonProperty
     private Integer imgHeight;
 
-    // FIXME: ID generator must work through @Id and/or @GeneratedValue; ID generation bug inside of spring-data-elastic, please read FIXME in root folder
     public EventLocation() {
+        // FIXME: ID generator must work through @Id and/or @GeneratedValue; ID generation bug inside of spring-data-elastic, please read FIXME in root folder
         this.id = new Random().nextLong();
     }
 

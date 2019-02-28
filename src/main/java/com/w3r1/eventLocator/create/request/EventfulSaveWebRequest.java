@@ -6,10 +6,11 @@ import lombok.*;
 import java.util.Objects;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class EventsWebRequest {
+public class EventfulSaveWebRequest {
 
     @JsonProperty
     private String location;
@@ -21,7 +22,7 @@ public class EventsWebRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EventsWebRequest that = (EventsWebRequest) o;
+        EventfulSaveWebRequest that = (EventfulSaveWebRequest) o;
         return Objects.equals(location, that.location) &&
                 Objects.equals(category, that.category);
     }

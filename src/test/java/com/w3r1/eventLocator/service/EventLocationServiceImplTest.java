@@ -37,14 +37,14 @@ public class EventLocationServiceImplTest {
     public void searchCrossThroughTitleDescriptionCategoryAndCity() {
 
         given(eventLocationRepository
-                .searchCrossThroughTitleDescriptionCategoryAndCity(anyString(), any()))
+                .searchThroughTitleDescriptionCategoryAndCity(anyString(), any()))
                 .willReturn(Page.empty());
 
         Page<EventLocation> search = eventLocationService
-                .searchCrossThroughTitleDescriptionCategoryAndCity("search", of(1, 1));
+                .searchThroughTitleDescriptionCategoryAndCity("search", of(1, 1));
 
         verify(eventLocationRepository, times(1))
-                .searchCrossThroughTitleDescriptionCategoryAndCity(eq("search"), eq(of(1, 1)));
+                .searchThroughTitleDescriptionCategoryAndCity(eq("search"), eq(of(1, 1)));
         assertThat(search, equalTo(Page.empty()));
     }
 

@@ -2,7 +2,7 @@ package com.w3r1.eventLocator.create.client;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.w3r1.eventLocator.create.client.domain.EventsResponse;
-import com.w3r1.eventLocator.create.request.EventsWebRequest;
+import com.w3r1.eventLocator.create.request.EventfulSaveWebRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class EventfulClient {
             commandKey = HYSTRIX_COMMAND_KEY_GET_EVENTS,
             fallbackMethod = "fallbackGetEventfulEvents"
     )
-    public Optional<EventsResponse> getEventfulEvents(EventsWebRequest request, int pageNo, int pageSize) {
+    public Optional<EventsResponse> getEventfulEvents(EventfulSaveWebRequest request, int pageNo, int pageSize) {
 
         boolean isRequestGiven = request != null;
         if (!isRequestGiven) {
@@ -88,7 +88,7 @@ public class EventfulClient {
     }
 
     @SuppressWarnings("unused")
-    public Optional<EventsResponse> fallbackGetEventfulEvents(EventsWebRequest request, int pageNo, int pageSize, Throwable exception) {
+    public Optional<EventsResponse> fallbackGetEventfulEvents(EventfulSaveWebRequest request, int pageNo, int pageSize, Throwable exception) {
 
         if(exception instanceof HttpStatusCodeException) {
             HttpStatusCodeException httpStatusCodeException = (HttpStatusCodeException) exception;

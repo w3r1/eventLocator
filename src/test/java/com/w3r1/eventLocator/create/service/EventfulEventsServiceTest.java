@@ -3,7 +3,7 @@ package com.w3r1.eventLocator.create.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.w3r1.eventLocator.create.client.EventfulClient;
 import com.w3r1.eventLocator.create.client.domain.EventsResponse;
-import com.w3r1.eventLocator.create.request.EventsWebRequest;
+import com.w3r1.eventLocator.create.request.EventfulSaveWebRequest;
 import com.w3r1.eventLocator.create.service.domain.EventLocationsPage;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class EventfulEventsServiceTest {
         int testPageNo = 1;
         int testPageSize = 10;
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).category(testCategory).build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location(testLocation).category(testCategory).build();
         given(eventfulClient.getEventfulEvents(eq(webRequest), eq(testPageNo), eq(testPageSize)))
                 .willReturn(Optional.of(defaultEventsResponse()));
 

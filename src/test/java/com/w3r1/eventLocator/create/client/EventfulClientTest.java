@@ -3,7 +3,7 @@ package com.w3r1.eventLocator.create.client;
 import com.w3r1.eventLocator.create.client.domain.Event;
 import com.w3r1.eventLocator.create.client.domain.Events;
 import com.w3r1.eventLocator.create.client.domain.EventsResponse;
-import com.w3r1.eventLocator.create.request.EventsWebRequest;
+import com.w3r1.eventLocator.create.request.EventfulSaveWebRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -80,7 +80,7 @@ public class EventfulClientTest {
                 .exchange(uriCaptor.capture(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
                 .willReturn(responseEntity);
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location(testLocation).build();
         EventsResponse eventsResponse =
                 eventfulClient.getEventfulEvents(webRequest, testPageNo, testPageSize).get();
 
@@ -122,7 +122,7 @@ public class EventfulClientTest {
                 .exchange(uriCaptor.capture(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
                 .willReturn(responseEntity);
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).category(testCategory).build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location(testLocation).category(testCategory).build();
         EventsResponse eventsResponse =
                 eventfulClient.getEventfulEvents(webRequest, testPageNo, testPageSize).get();
 
@@ -166,7 +166,7 @@ public class EventfulClientTest {
                 .exchange(uriCaptor.capture(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
                 .willReturn(responseEntity);
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location(testLocation).build();
         thisEventfulClient.getEventfulEvents(webRequest, testPageNo, testPageSize).get();
 
         verify(restTemplate, times(1))
@@ -191,7 +191,7 @@ public class EventfulClientTest {
         HttpServerErrorException testException =
                 new HttpServerErrorException(INTERNAL_SERVER_ERROR, "Error status", testErrorBody.getBytes(), Charset.defaultCharset());
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location("London").build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location("London").build();
         Optional<EventsResponse> eventsResponseOptional =
                 eventfulClient.fallbackGetEventfulEvents(webRequest, 1, 10, testException);
 
@@ -209,7 +209,7 @@ public class EventfulClientTest {
         RuntimeException testException =
                 new RuntimeException("Some error");
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location("London").build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location("London").build();
         Optional<EventsResponse> eventsResponseOptional =
                 eventfulClient.fallbackGetEventfulEvents(webRequest, 1, 10, testException);
 
@@ -245,7 +245,7 @@ public class EventfulClientTest {
                 .exchange(uriCaptor.capture(), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
                 .willReturn(responseEntity);
 
-        EventsWebRequest webRequest = EventsWebRequest.builder().location(testLocation).build();
+        EventfulSaveWebRequest webRequest = EventfulSaveWebRequest.builder().location(testLocation).build();
         Optional<EventsResponse> eventsResponseOptional =
                 eventfulClient.getEventfulEvents(webRequest, testPageNo, testPageSize);
 

@@ -1,6 +1,6 @@
 package com.w3r1.eventLocator.create.facade;
 
-import com.w3r1.eventLocator.create.request.EventsWebRequest;
+import com.w3r1.eventLocator.create.request.EventfulSaveWebRequest;
 import com.w3r1.eventLocator.create.service.EventfulEventsService;
 import com.w3r1.eventLocator.create.service.domain.EventLocationsPage;
 import com.w3r1.eventLocator.model.EventLocation;
@@ -28,7 +28,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SaveEventfulEventsFacadeTest {
+public class EventfulEventsSaveFacadeTest {
 
     @Mock
     private EventfulEventsService eventfulEventsService;
@@ -39,11 +39,11 @@ public class SaveEventfulEventsFacadeTest {
     @Captor
     private ArgumentCaptor<List<EventLocation>> eventLocationsCaptor;
 
-    private SaveEventfulEventsFacade saveEventfulEventsFacade;
+    private EventfulEventsSaveFacade eventfulEventsSaveFacade;
 
     @Before
     public void setup() {
-        saveEventfulEventsFacade = new SaveEventfulEventsFacadeImpl(eventfulEventsService, eventLocationService);
+        eventfulEventsSaveFacade = new EventfulEventsSaveFacadeImpl(eventfulEventsService, eventLocationService);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class SaveEventfulEventsFacadeTest {
 
         doAnswer(answer -> null).when(eventLocationService).saveAll(eventLocationsCaptor.capture());
 
-        saveEventfulEventsFacade.queryFromEventfulAndSaveToDatastore(EventsWebRequest.builder().build());
+        eventfulEventsSaveFacade.queryFromEventfulAndSaveToDatastore(EventfulSaveWebRequest.builder().build());
 
         verify(eventfulEventsService, times(3))
                 .getEventfulEvents(any(), anyInt(), anyInt());
@@ -91,6 +91,6 @@ public class SaveEventfulEventsFacadeTest {
 
         given(eventfulEventsService.getEventfulEvents(any(), anyInt(), anyInt()))
                 .willReturn(EventLocationsPage.builder().pageCount(0).pageNumber(0).build());
-        saveEventfulEventsFacade.queryFromEventfulAndSaveToDatastore(null);
+        eventfulEventsSaveFacade.queryFromEventfulAndSaveToDatastore(null);
     }
 }

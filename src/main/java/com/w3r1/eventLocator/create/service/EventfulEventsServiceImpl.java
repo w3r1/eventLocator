@@ -2,13 +2,14 @@ package com.w3r1.eventLocator.create.service;
 
 import com.w3r1.eventLocator.create.client.EventfulClient;
 import com.w3r1.eventLocator.create.client.domain.EventsResponse;
-import com.w3r1.eventLocator.create.request.EventsWebRequest;
+import com.w3r1.eventLocator.create.request.EventfulSaveWebRequest;
 import com.w3r1.eventLocator.create.service.domain.EventLocationsPage;
 import com.w3r1.eventLocator.model.EventLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 import static io.vavr.API.Try;
 
+@Service
 public class EventfulEventsServiceImpl implements EventfulEventsService {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -29,7 +31,7 @@ public class EventfulEventsServiceImpl implements EventfulEventsService {
     }
 
     @Override
-    public EventLocationsPage getEventfulEvents(final EventsWebRequest request, int pageNo, int pageSize) {
+    public EventLocationsPage getEventfulEvents(final EventfulSaveWebRequest request, int pageNo, int pageSize) {
 
         final Optional<EventsResponse> eventfulEvents = eventfulClient.getEventfulEvents(request, pageNo, pageSize);
         return eventfulEvents.map(eventsResponse -> {
